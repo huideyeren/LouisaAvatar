@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2927595994558924966
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2927595994558924964}
+  - component: {fileID: 2927595994558924967}
+  m_Layer: 0
+  m_Name: DefaultSettings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2927595994558924964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2927595994558924966}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2927595994558924967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2927595994558924966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1daa38d7e70bd3e418df02eda4bbfcbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastVersion: 21000
+  buildMode: 0
+  avatar: {fileID: 0}
+  cameraObject: {fileID: 0}
+  cameraDroppable: {fileID: 0}
+  overrideDroneController: 0
+  overrideRepositionOrigin: 0
+  overrideSelfieMarkers: 0
+  screenTouchers: []
+  droneController: {fileID: 0}
+  repositionOrigin: {fileID: 0}
+  selfieMarkerLeft: {fileID: 0}
+  selfieMarkerRight: {fileID: 0}
+  minFocalLength: 12
+  maxFocalLength: 300
+  defaultFocalLength: 50
+  synchronizeFocalLength: 0
+  enableBlurring: 1
+  minFNumber: 1
+  maxFNumber: 22
+  defaultFNumber: 22
+  synchronizeFNumber: 0
+  enableManualFocusing: 1
+  minFocusDistance: 0.5
+  maxFocusDistance: 40
+  synchronizeFocusDistance: 0
+  enableExposure: 1
+  exposureRange: 3
+  defaultExposure: 0
+  synchronizeExposure: 0
+  enableDrone: 1
+  droneLinearSpeed: 30
+  droneLinearDeadZone: 0.02
+  droneYawSpeed: 180
+  clippingNear: 0.05
+  clippingFar: 5000
+  optionalObjects: []
+  hideableObjects: []
+  shortcuts: []
+  initialGridType: 0
+  customGrids: []
+  initialInformation: 0
+  initialLevel: 0
+  initialPeakingMode: 0
+  initialAutoFocusMode: 0
+  initialTrackingSpeed: 2
+  initialAutoFocusSpeed: 0
+  useHighResolution: 0
+  logiBokehMaxBlurriness: 9
+  logiBokehAntialiasMethod: 0
+  logiBokehRealtimeAntialiasMethod: 0
+  logiBokehMSAASamples: 2
+  artifactsFolder: 
+  clearArtifacts: 1
+  touchableThickness: 1
+  writeDefaults: 2
+  depthEnablerMode: 1
+  externalPoseSource: {fileID: 0}
+  remoteOnlyMode: 2
+  useModularAvatarIntegration: 0
+  droppableObjects: []
+  stabilizerTarget: {fileID: 0}
+  initialGrid: 0
+  highResolutionMSAA: 2
+  algorithm: 0

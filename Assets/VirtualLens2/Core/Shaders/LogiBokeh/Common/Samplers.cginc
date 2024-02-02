@@ -1,0 +1,7 @@
+#ifndef VIRTUALLENS2_LOGIBOKEH_COMMON_SAMPLERS_CGINC
+#define VIRTUALLENS2_LOGIBOKEH_COMMON_SAMPLERS_CGINC
+
+SamplerState point_clamp_sampler;
+SamplerState linear_clamp_sampler;
+
+#endif
