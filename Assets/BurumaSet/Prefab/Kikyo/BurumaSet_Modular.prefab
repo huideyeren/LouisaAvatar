@@ -1,0 +1,449 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2799022600833267539
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 74c3395a5669b95469dee1e7c5e78a22,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 74c3395a5669b95469dee1e7c5e78a22,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 74c3395a5669b95469dee1e7c5e78a22,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6855703348762980839, guid: 74c3395a5669b95469dee1e7c5e78a22,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2360905680155286313, guid: 74c3395a5669b95469dee1e7c5e78a22,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 526727211822686535, guid: 74c3395a5669b95469dee1e7c5e78a22,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 74c3395a5669b95469dee1e7c5e78a22,
+        type: 3}
+      propertyPath: m_Name
+      value: BurumaSet_Modular
+      objectReference: {fileID: 0}
+    - target: {fileID: 3565775105278434947, guid: 74c3395a5669b95469dee1e7c5e78a22,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7036213049465896255, guid: 74c3395a5669b95469dee1e7c5e78a22,
+        type: 3}
+      propertyPath: m_Name
+      value: Armature.1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 74c3395a5669b95469dee1e7c5e78a22,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1160413990347715096}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 74c3395a5669b95469dee1e7c5e78a22,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1626951155701666886}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 74c3395a5669b95469dee1e7c5e78a22,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 157409831058462791}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 74c3395a5669b95469dee1e7c5e78a22,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9150550867056333429}
+    - targetCorrespondingSourceObject: {fileID: 7036213049465896255, guid: 74c3395a5669b95469dee1e7c5e78a22,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3220391285828553277}
+    - targetCorrespondingSourceObject: {fileID: 526727211822686535, guid: 74c3395a5669b95469dee1e7c5e78a22,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5242716592493715861}
+    - targetCorrespondingSourceObject: {fileID: 3565775105278434947, guid: 74c3395a5669b95469dee1e7c5e78a22,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9085586437354505061}
+    - targetCorrespondingSourceObject: {fileID: -6855703348762980839, guid: 74c3395a5669b95469dee1e7c5e78a22,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5622038889050292652}
+  m_SourcePrefab: {fileID: 100100000, guid: 74c3395a5669b95469dee1e7c5e78a22, type: 3}
+--- !u!1 &433337432624216394 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6855703348762980839, guid: 74c3395a5669b95469dee1e7c5e78a22,
+    type: 3}
+  m_PrefabInstance: {fileID: 2799022600833267539}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5622038889050292652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433337432624216394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd7cab7d93b403280f2f9da978d8a4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bindings:
+  - ReferenceMesh:
+      referencePath: Kikyo_Body_Base
+    Blendshape: Toe_open
+    LocalBlendshape: 
+  - ReferenceMesh:
+      referencePath: Kikyo_Body_Base
+    Blendshape: Toe_close
+    LocalBlendshape: 
+  - ReferenceMesh:
+      referencePath: Kikyo_Body_Base
+    Blendshape: Toe_highheels
+    LocalBlendshape: 
+--- !u!1 &1703501579157088720 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3565775105278434947, guid: 74c3395a5669b95469dee1e7c5e78a22,
+    type: 3}
+  m_PrefabInstance: {fileID: 2799022600833267539}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9085586437354505061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1703501579157088720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd7cab7d93b403280f2f9da978d8a4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bindings:
+  - ReferenceMesh:
+      referencePath: Kikyo_Body_Base
+    Blendshape: Toe_highheels
+    LocalBlendshape: 
+--- !u!1 &2420526066357360148 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 526727211822686535, guid: 74c3395a5669b95469dee1e7c5e78a22,
+    type: 3}
+  m_PrefabInstance: {fileID: 2799022600833267539}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5242716592493715861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2420526066357360148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd7cab7d93b403280f2f9da978d8a4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bindings:
+  - ReferenceMesh:
+      referencePath: Kikyo_Body_Base
+    Blendshape: Breasts_big
+    LocalBlendshape: 
+  - ReferenceMesh:
+      referencePath: Kikyo_Body_Base
+    Blendshape: Breasts_small
+    LocalBlendshape: 
+  - ReferenceMesh:
+      referencePath: Kikyo_Body_Base
+    Blendshape: Nipple_ON
+    LocalBlendshape: 
+--- !u!1 &3033537085412329986 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 74c3395a5669b95469dee1e7c5e78a22,
+    type: 3}
+  m_PrefabInstance: {fileID: 2799022600833267539}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1160413990347715096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3033537085412329986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560fdafd46c74b2db6422fdf0e7f2363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InheritProbeAnchor: 1
+  ProbeAnchor:
+    referencePath: Armature/Hips/Spine/Chest/Anchor
+  InheritBounds: 1
+  RootBone:
+    referencePath: Armature/Hips
+  Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+--- !u!114 &1626951155701666886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3033537085412329986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bb122659f724ebf85fe095ac02dc339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 9100000, guid: dda5c9494f1447d43b78773cdc07aaf9, type: 2}
+  layerType: 5
+  deleteAttachedAnimator: 0
+  pathMode: 1
+  matchAvatarWriteDefaults: 1
+--- !u!114 &157409831058462791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3033537085412329986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef83cb0c23d4d7c9d41021e544a1978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuToAppend: {fileID: 11400000, guid: 6aeaf0a55f48e4c4ea0a88a8ea8e6c86, type: 2}
+  installTargetMenu: {fileID: 0}
+--- !u!114 &9150550867056333429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3033537085412329986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a96d4ea0c344f39e277d82035bf9bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parameters:
+  - nameOrPrefix: CustomColor1_Hue
+    remapTo: 
+    internalParameter: 1
+    isPrefix: 0
+    syncType: 2
+    localOnly: 1
+    defaultValue: 0.62
+    saved: 1
+  - nameOrPrefix: CustomColor1_Saturation
+    remapTo: 
+    internalParameter: 1
+    isPrefix: 0
+    syncType: 2
+    localOnly: 1
+    defaultValue: 0.45
+    saved: 1
+  - nameOrPrefix: CustomColor1_Value
+    remapTo: 
+    internalParameter: 1
+    isPrefix: 0
+    syncType: 2
+    localOnly: 1
+    defaultValue: 0.78
+    saved: 1
+  - nameOrPrefix: CustomColor2_Hue
+    remapTo: 
+    internalParameter: 1
+    isPrefix: 0
+    syncType: 2
+    localOnly: 1
+    defaultValue: 0
+    saved: 1
+  - nameOrPrefix: CustomColor2_Saturation
+    remapTo: 
+    internalParameter: 1
+    isPrefix: 0
+    syncType: 2
+    localOnly: 1
+    defaultValue: 0
+    saved: 1
+  - nameOrPrefix: CustomColor2_Value
+    remapTo: 
+    internalParameter: 1
+    isPrefix: 0
+    syncType: 2
+    localOnly: 1
+    defaultValue: 0
+    saved: 1
+  - nameOrPrefix: Buruma_ColorSet
+    remapTo: 
+    internalParameter: 1
+    isPrefix: 0
+    syncType: 1
+    localOnly: 1
+    defaultValue: 0
+    saved: 1
+  - nameOrPrefix: Buruma_OnOff
+    remapTo: 
+    internalParameter: 0
+    isPrefix: 0
+    syncType: 3
+    localOnly: 0
+    defaultValue: 0
+    saved: 1
+  - nameOrPrefix: Buruma_Parts_Socks
+    remapTo: 
+    internalParameter: 0
+    isPrefix: 0
+    syncType: 3
+    localOnly: 0
+    defaultValue: 0
+    saved: 1
+  - nameOrPrefix: Buruma_Parts_Buruma
+    remapTo: 
+    internalParameter: 0
+    isPrefix: 0
+    syncType: 3
+    localOnly: 0
+    defaultValue: 0
+    saved: 1
+  - nameOrPrefix: Buruma_Parts_Shoes
+    remapTo: 
+    internalParameter: 0
+    isPrefix: 0
+    syncType: 3
+    localOnly: 0
+    defaultValue: 0
+    saved: 1
+  - nameOrPrefix: Buruma_Parts_Shirt
+    remapTo: 
+    internalParameter: 0
+    isPrefix: 0
+    syncType: 3
+    localOnly: 0
+    defaultValue: 0
+    saved: 1
+  - nameOrPrefix: Buruma_Tuckin
+    remapTo: 
+    internalParameter: 0
+    isPrefix: 0
+    syncType: 3
+    localOnly: 0
+    defaultValue: 1
+    saved: 1
+  - nameOrPrefix: Buruma_Socks_Shorter
+    remapTo: 
+    internalParameter: 0
+    isPrefix: 0
+    syncType: 3
+    localOnly: 0
+    defaultValue: 0
+    saved: 1
+  - nameOrPrefix: Buruma_Color_Hue
+    remapTo: 
+    internalParameter: 0
+    isPrefix: 0
+    syncType: 2
+    localOnly: 0
+    defaultValue: 0.62
+    saved: 1
+  - nameOrPrefix: Buruma_Color_Saturation
+    remapTo: 
+    internalParameter: 0
+    isPrefix: 0
+    syncType: 2
+    localOnly: 0
+    defaultValue: 0.45
+    saved: 1
+  - nameOrPrefix: Buruma_Color_Value
+    remapTo: 
+    internalParameter: 0
+    isPrefix: 0
+    syncType: 2
+    localOnly: 0
+    defaultValue: 0.78
+    saved: 1
+  - nameOrPrefix: Coat
+    remapTo: 
+    internalParameter: 0
+    isPrefix: 0
+    syncType: 0
+    localOnly: 0
+    defaultValue: 0
+    saved: 1
+  - nameOrPrefix: Garter
+    remapTo: 
+    internalParameter: 0
+    isPrefix: 0
+    syncType: 0
+    localOnly: 0
+    defaultValue: 0
+    saved: 1
+  - nameOrPrefix: Boots
+    remapTo: 
+    internalParameter: 0
+    isPrefix: 0
+    syncType: 0
+    localOnly: 0
+    defaultValue: 0
+    saved: 1
+  - nameOrPrefix: Blouse
+    remapTo: 
+    internalParameter: 0
+    isPrefix: 0
+    syncType: 0
+    localOnly: 0
+    defaultValue: 0
+    saved: 1
+  - nameOrPrefix: Skirt
+    remapTo: 
+    internalParameter: 0
+    isPrefix: 0
+    syncType: 0
+    localOnly: 0
+    defaultValue: 0
+    saved: 1
+--- !u!1 &5151421179450690156 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7036213049465896255, guid: 74c3395a5669b95469dee1e7c5e78a22,
+    type: 3}
+  m_PrefabInstance: {fileID: 2799022600833267539}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3220391285828553277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5151421179450690156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2df373bf91cf30b4bbd495e11cb1a2ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mergeTarget:
+    referencePath: Armature
+  prefix: 
+  suffix: 
+  legacyLocked: 0
+  LockMode: 1
+  mangleNames: 1
