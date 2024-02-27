@@ -346,7 +346,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - m_Name: FS_SmoothParam
     m_Type: 1
-    m_DefaultFloat: 0.8
+    m_DefaultFloat: 0.75
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
@@ -518,6 +518,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: FS_Stay
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -569,7 +575,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
     m_Name: FS_MirrorDetection
-    m_StateMachine: {fileID: 6416359202609389379, guid: 02570dd42eb43e943867411b0d7a4b63,
+    m_StateMachine: {fileID: 6416359202609389379, guid: 4a6b33dea4ada4546a95744b9168b76f,
       type: 2}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -582,7 +588,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
     m_Name: FS_Locomotion
-    m_StateMachine: {fileID: -296040084789223451, guid: e24af91c2fbf34a49843529011950f13,
+    m_StateMachine: {fileID: -296040084789223451, guid: 0c9ead12e31f54057b8ec879671745ec,
       type: 2}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -595,7 +601,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
     m_Name: FS_SMoothing
-    m_StateMachine: {fileID: 7323772430695795564, guid: 02570dd42eb43e943867411b0d7a4b63,
+    m_StateMachine: {fileID: 7323772430695795564, guid: 4a6b33dea4ada4546a95744b9168b76f,
       type: 2}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -608,7 +614,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
     m_Name: FS_MeasureX
-    m_StateMachine: {fileID: 1469809543895081878, guid: 02570dd42eb43e943867411b0d7a4b63,
+    m_StateMachine: {fileID: 1469809543895081878, guid: 4a6b33dea4ada4546a95744b9168b76f,
       type: 2}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -621,7 +627,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
     m_Name: FS_MeasureZ
-    m_StateMachine: {fileID: -447226720096974743, guid: 02570dd42eb43e943867411b0d7a4b63,
+    m_StateMachine: {fileID: -447226720096974743, guid: 4a6b33dea4ada4546a95744b9168b76f,
       type: 2}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -634,7 +640,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
     m_Name: FS_RemotePositionX
-    m_StateMachine: {fileID: -7471619694188112064, guid: 02570dd42eb43e943867411b0d7a4b63,
+    m_StateMachine: {fileID: -7471619694188112064, guid: 4a6b33dea4ada4546a95744b9168b76f,
       type: 2}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -647,7 +653,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
     m_Name: FS_RemotePositionZ
-    m_StateMachine: {fileID: -5925312527257816499, guid: 02570dd42eb43e943867411b0d7a4b63,
+    m_StateMachine: {fileID: -5925312527257816499, guid: 4a6b33dea4ada4546a95744b9168b76f,
       type: 2}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -660,7 +666,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
     m_Name: FS_FinalRemotePositionX
-    m_StateMachine: {fileID: 4413337312980629100, guid: 02570dd42eb43e943867411b0d7a4b63,
+    m_StateMachine: {fileID: 4413337312980629100, guid: 4a6b33dea4ada4546a95744b9168b76f,
       type: 2}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -673,7 +679,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
     m_Name: FS_FinalRemotePositionZ
-    m_StateMachine: {fileID: 1049884608048734366, guid: 02570dd42eb43e943867411b0d7a4b63,
+    m_StateMachine: {fileID: 1049884608048734366, guid: 4a6b33dea4ada4546a95744b9168b76f,
       type: 2}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -686,7 +692,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
     m_Name: FS_IsMirror
-    m_StateMachine: {fileID: 4845758520405199075, guid: 02570dd42eb43e943867411b0d7a4b63,
+    m_StateMachine: {fileID: 4845758520405199075, guid: 4a6b33dea4ada4546a95744b9168b76f,
       type: 2}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -699,7 +705,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
     m_Name: FS_Move
-    m_StateMachine: {fileID: 3443049023572376462, guid: 02570dd42eb43e943867411b0d7a4b63,
+    m_StateMachine: {fileID: 3443049023572376462, guid: 4a6b33dea4ada4546a95744b9168b76f,
       type: 2}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -712,7 +718,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
     m_Name: FS_MasterSwitch
-    m_StateMachine: {fileID: 5155282390781398287, guid: 02570dd42eb43e943867411b0d7a4b63,
+    m_StateMachine: {fileID: 5155282390781398287, guid: 4a6b33dea4ada4546a95744b9168b76f,
       type: 2}
     m_Mask: {fileID: 0}
     m_Motions: []

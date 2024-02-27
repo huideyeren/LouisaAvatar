@@ -229,7 +229,8 @@
         "com.unity.mathematics": "1.2.6",
         "com.unity.nuget.newtonsoft-json": "3.2.1",
         "com.unity.xr.management": "4.3.3",
-        "com.unity.xr.oculus": "4.0.0"
+        "com.unity.xr.oculus": "4.0.0",
+        "com.unity.postprocessing": "3.2.2"
       }
     },
     "com.vrchat.core.vpm-resolver": {
@@ -245,7 +246,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.vrmc.vrmshaders": "0.110.0",
+        "com.vrmc.vrmshaders": "0.119.0",
         "com.unity.modules.animation": "1.0.0"
       }
     },
@@ -254,8 +255,8 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.vrmc.vrmshaders": "0.110.0",
-        "com.vrmc.gltf": "0.110.0",
+        "com.vrmc.vrmshaders": "0.119.0",
+        "com.vrmc.gltf": "0.119.0",
         "com.unity.ugui": "1.0.0"
       }
     },
@@ -290,7 +291,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.vrmc.univrm": "0.110.0"
+        "com.vrmc.univrm": "0.119.0"
       }
     },
     "jp.pokemori.vrm-converter-for-vrchat": {
@@ -298,9 +299,9 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.vrchat.avatars": "3.2.0",
-        "com.vrmc.univrm": "0.110.0",
-        "jp.pokemori.univrm-extensions": "8.2.0"
+        "com.vrchat.avatars": "3.5.0",
+        "com.vrmc.univrm": "0.119.0",
+        "jp.pokemori.univrm-extensions": "10.0.0"
       }
     },
     "jp.suzuryg.face-emo": {
@@ -367,6 +368,12 @@
     },
     "net.narazaka.vrchat.avatar-parameters-driver": {
       "version": "file:net.narazaka.vrchat.avatar-parameters-driver",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
+    "net.narazaka.vrchat.avatar-parameters-util": {
+      "version": "file:net.narazaka.vrchat.avatar-parameters-util",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}

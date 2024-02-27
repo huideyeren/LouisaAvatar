@@ -1,5 +1,4 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -12,9 +11,8 @@ using UnityEngine.UI;
 using VRC.Core;
 using VRC.SDK3.Avatars.Components;
 using VRC.SDK3.Avatars.ScriptableObjects;
-using static SetUpFollower;
-using static VRC.SDK3.Avatars.Components.VRCAvatarDescriptor;
-using static VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionsMenu.Control;
+using VRC.SDK3A.Editor;
+
 
 public class SetUpFollower : EditorWindow
 {
@@ -69,7 +67,7 @@ public class SetUpFollower : EditorWindow
 
             if (origFX != null)
             {
-                useFX = GUILayout.Toggle(useFX, "元のアバターのFXレイヤーを継承する");
+                useFX = GUILayout.Toggle(useFX, "元のアバターのFXレイヤーを継承する（β）");
 
                 if (useFX)
                 {
@@ -101,43 +99,75 @@ public class SetUpFollower : EditorWindow
         {
             try
             {
-                setup();
-                EditorUtility.DisplayDialog("Finished", "Finished!", "OK");
+                var result = setup(false);
+                if (result)
+                {
+                    EditorUtility.DisplayDialog("Finished", "Finished!", "OK");
+                }
             }
             catch (Exception e)
             {
                 EditorUtility.DisplayDialog("Error", "An error occurred. See console log.", "OK");
                 Debug.LogError(e);
-                remove();
+                remove(true);
             }
         }
         if (GUILayout.Button("Remove"))
         {
-
             try
             {
-                remove();
+                remove(true);
                 EditorUtility.DisplayDialog("Finished", "Finished!", "OK");
             }
             catch (Exception e)
             {
                 EditorUtility.DisplayDialog("Error", "An error occurred. See console log.", "OK");
                 Debug.LogError(e);
+            }
+        }
+
+        if (GUILayout.Button("アバターを維持してセットアップしなおす"))
+        {
+            try
+            {
+                var result = setup(true);
+                if (result)
+                {
+                    EditorUtility.DisplayDialog("Finished", "Finished!", "OK");
+                }
+            }
+            catch (Exception e)
+            {
+                EditorUtility.DisplayDialog("Error", "An error occurred. See console log.", "OK");
+                Debug.LogError(e);
+                remove(true);
             }
         }
 
     }
 
-    void setup()
+    bool setup(bool maintainAvatar)
     {
-        
+        if (maintainAvatar == true && avatarDescriptor.transform.Find("FollowerSystem/Follower/AvatarBackup").GetChild(0) != null)
+        {
+            var bk = avatarDescriptor.transform.Find("FollowerSystem/Follower/AvatarBackup").GetChild(0).gameObject;
+            bk.transform.parent = null;
+            HumAvatar = bk.GetComponent<VRCAvatarDescriptor>();
+        }
+
+        if (HumAvatar == null)
+        {
+            return false;
+        }
+
         try
         {
-            remove();
+            remove(false);
         }
         catch(Exception e)
         {
             Debug.LogException(e);
+            return false;
         }
 
         var mainAnimator = avatarDescriptor.GetComponent<Animator>();
@@ -150,6 +180,13 @@ public class SetUpFollower : EditorWindow
         SystemRoot.transform.rotation = avatarDescriptor.transform.rotation;
 
         var FollowerRoot = SystemRoot.transform.Find("Follower");
+
+        GameObject AvatarBackupRoot = FollowerRoot.Find("AvatarBackup").gameObject;
+        GameObject AvatarBackup = Instantiate(HumAvatar.gameObject);
+        AvatarBackup.transform.parent = AvatarBackupRoot.transform;
+
+        AvatarBackupRoot.tag = "EditorOnly";
+        AvatarBackupRoot.SetActive(false);
 
         HumAvatar.transform.parent = FollowerRoot;
         HumAvatar.transform.position = FollowerRoot.transform.position;
@@ -179,8 +216,8 @@ public class SetUpFollower : EditorWindow
         {
             EditorUtility.DisplayDialog("Error", "AvatarConversion Faild", "OK");
             Debug.LogException(e);
-            remove();
-            return;
+            remove(true);
+            return false;
         }
 
         var convertedControllerPath = convertedDataPath + avatarDescriptor.name + "/LocomotionConverted.asset";
@@ -192,7 +229,6 @@ public class SetUpFollower : EditorWindow
 
         AssetDatabase.CopyAsset(controllerPath, convertedControllerPath);
         
-
         var convertedController = AssetDatabase.LoadAssetAtPath<AnimatorController>(convertedControllerPath);
 
         foreach(var layer in convertedController.layers)
@@ -233,9 +269,9 @@ public class SetUpFollower : EditorWindow
 
 
 
-        var IKEO = FollowerRoot.transform.Find("AimIK").GetComponent<RootMotion.FinalIK.IKExecutionOrder>();
+        var IKEO = FollowerRoot.transform.Find("IK/AimIK").GetComponent<RootMotion.FinalIK.IKExecutionOrder>();
         IKEO.animator = avatarDescriptor.GetComponent<Animator>();
-        var AimIKHead = FollowerRoot.transform.Find("AimIK/Head").GetComponent<RootMotion.FinalIK.AimIK>();
+        var AimIKHead = FollowerRoot.transform.Find("IK/AimIK/Head").GetComponent<RootMotion.FinalIK.AimIK>();
         AimIKHead.solver.transform = followerAnimator.GetBoneTransform(HumanBodyBones.Head);
         AimIKHead.solver.bones[0].transform = followerAnimator.GetBoneTransform(HumanBodyBones.Spine);
         AimIKHead.solver.bones[0].weight = 0.3f;
@@ -245,12 +281,12 @@ public class SetUpFollower : EditorWindow
         AimIKHead.solver.bones[2].weight = 1f;
         AimIKHead.solver.target = SystemRoot.transform.Find("Base/AvatarAnchor/Head");
 
-        var AimIKLeftEye = FollowerRoot.transform.Find("AimIK/LeftEye").GetComponent<RootMotion.FinalIK.AimIK>();
+        var AimIKLeftEye = FollowerRoot.transform.Find("IK/AimIK/LeftEye").GetComponent<RootMotion.FinalIK.AimIK>();
         AimIKLeftEye.solver.transform = followerAnimator.GetBoneTransform(HumanBodyBones.LeftEye);
         AimIKLeftEye.solver.bones[0].transform = followerAnimator.GetBoneTransform(HumanBodyBones.LeftEye);
         AimIKLeftEye.solver.target = SystemRoot.transform.Find("Base/AvatarAnchor/Head");
 
-        var AimIKRightEye = FollowerRoot.transform.Find("AimIK/RightEye").GetComponent<RootMotion.FinalIK.AimIK>();
+        var AimIKRightEye = FollowerRoot.transform.Find("IK/AimIK/RightEye").GetComponent<RootMotion.FinalIK.AimIK>();
         AimIKRightEye.solver.transform = followerAnimator.GetBoneTransform(HumanBodyBones.RightEye);
         AimIKRightEye.solver.bones[0].transform = followerAnimator.GetBoneTransform(HumanBodyBones.RightEye);
         AimIKRightEye.solver.target = SystemRoot.transform.Find("Base/AvatarAnchor/Head");
@@ -303,9 +339,9 @@ public class SetUpFollower : EditorWindow
         catch (Exception ex)
         {
             EditorUtility.DisplayDialog("Error", "No FxAnimator Found", "OK");
-            Debug.LogError(ex.Message);
-            remove();
-            return;
+            Debug.LogError(ex);
+            remove(true);
+            return false;
         }
 
 
@@ -321,19 +357,23 @@ public class SetUpFollower : EditorWindow
             }
         }
 
-        var convertedFXPath = convertedDataPath + avatarDescriptor.name + "/FXConverted.asset";
-        if (File.Exists(convertedFXPath))
-        {
-            AssetDatabase.DeleteAsset(convertedFXPath);
-        }
-        AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(origFX), convertedFXPath);
-        var convertedFX = AssetDatabase.LoadAssetAtPath<AnimatorController>(convertedFXPath);
+        Dictionary<string, AnimatorControllerParameterType> paramList = null;
 
-        EditorUtility.SetDirty(convertedFX);
-
-        var paramList = new Dictionary<string, AnimatorControllerParameterType>();
         if (useFX)
         {
+
+            var convertedFXPath = convertedDataPath + avatarDescriptor.name + "/FXConverted.asset";
+            if (File.Exists(convertedFXPath))
+            {
+                AssetDatabase.DeleteAsset(convertedFXPath);
+            }
+            AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(origFX), convertedFXPath);
+            var convertedFX = AssetDatabase.LoadAssetAtPath<AnimatorController>(convertedFXPath);
+
+            EditorUtility.SetDirty(convertedFX);
+
+            paramList = new Dictionary<string, AnimatorControllerParameterType>();
+
             for (int i = 0; i < convertedFX.layers.Length; i++)
             {
                 if (inheritLayers[i] == true)
@@ -345,12 +385,12 @@ public class SetUpFollower : EditorWindow
                             var paramType = convertedFX.parameters.FirstOrDefault(val => val.name == anytransition.conditions[k].parameter).type;
                             if (!paramList.ContainsKey(anytransition.conditions[k].parameter))
                             {
-                                
+
                                 paramList.Add(anytransition.conditions[k].parameter, paramType);
                             }
                         }
                     }
-                    for(int p = 0; p < convertedFX.layers[i].stateMachine.states.Length; p++)
+                    for (int p = 0; p < convertedFX.layers[i].stateMachine.states.Length; p++)
                     {
                         if (convertedFX.layers[i].stateMachine.states[p].state.cycleOffsetParameter != "")
                         {
@@ -378,7 +418,7 @@ public class SetUpFollower : EditorWindow
                         }
                         if (convertedFX.layers[i].stateMachine.states[p].state.timeParameter != "")
                         {
-                            
+
                             var paramType = convertedFX.parameters.FirstOrDefault(val => val.name == convertedFX.layers[i].stateMachine.states[p].state.timeParameter).type;
                             if (!paramList.ContainsKey(convertedFX.layers[i].stateMachine.states[p].state.timeParameter))
                             {
@@ -401,11 +441,11 @@ public class SetUpFollower : EditorWindow
                     }
                     var convertedLayer = ConvertFX(convertedFX.layers[i]);
                     convertedLayer.name = "FS_" + convertedFX.layers[i].name;
-                    if (!Array.Exists(FxAnimator.layers,(x => x.name == convertedLayer.name)))
+                    if (!Array.Exists(FxAnimator.layers, (x => x.name == convertedLayer.name)))
                     {
                         FxAnimator.AddLayer(convertedLayer);
                     }
-                    
+
                 }
             }
 
@@ -418,7 +458,6 @@ public class SetUpFollower : EditorWindow
             string json = JsonUtility.ToJson(serializableList);
 
             File.WriteAllText(convertedDataPath + avatarDescriptor.name + "/ParamList.json", json);
-
         }
 
         if (File.Exists(convertedDataPath + avatarDescriptor.name +  "/FollowerSystem_Params.asset"))
@@ -437,6 +476,8 @@ public class SetUpFollower : EditorWindow
         AssetDatabase.CopyAsset("Assets/nHaruka/FollowerSystem/FollowerSystem_Menu.asset", convertedDataPath + avatarDescriptor.name + "/FollowerSystem_Menu.asset");
         var AddSubMenu = AssetDatabase.LoadAssetAtPath<VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionsMenu>(convertedDataPath + avatarDescriptor.name + "/FollowerSystem_Menu.asset");
 
+        EditorUtility.SetDirty(avatarDescriptor.expressionParameters);
+        EditorUtility.SetDirty(avatarDescriptor.expressionsMenu);
 
         if (useFX)
         {
@@ -474,11 +515,9 @@ public class SetUpFollower : EditorWindow
         else
         {
             EditorUtility.DisplayDialog("Error", "ExpressionMenu is Max!", "OK");
-            return;
+            remove(true);
+            return false;
         }
-
-
-
 
         foreach (var layer in FxAnimator.layers)
         {
@@ -497,14 +536,16 @@ public class SetUpFollower : EditorWindow
                 }
             }
         }
-        
 
-        DestroyImmediate(HumAvatar.GetComponent<Animator>());
         DestroyImmediate(HumAvatar.GetComponent<PipelineManager>());
+        DestroyImmediate(HumAvatar.GetComponent<Animator>());
         DestroyImmediate(HumAvatar.GetComponent<VRCAvatarDescriptor>());
 
         AssetDatabase.SaveAssets();
 
+        SystemRoot.SetActive(false);
+
+        return true;
     }
 
     VRCExpressionsMenu ConvertMenu(VRCExpressionsMenu Menu)
@@ -569,15 +610,16 @@ public class SetUpFollower : EditorWindow
     }
 
 
-    void remove()
+    void remove(bool restoreAvatar)
     {
-        try
+        if(restoreAvatar == true && avatarDescriptor.transform.Find("FollowerSystem/Follower/AvatarBackup").GetChild(0) != null)
         {
-            DestroyImmediate(GameObject.Find("FollowerSystem").gameObject);
+            var bk = avatarDescriptor.transform.Find("FollowerSystem/Follower/AvatarBackup").GetChild(0).gameObject;
+            bk.transform.parent = null;
         }
-        catch
+        if(avatarDescriptor.transform.Find("FollowerSystem"))
         {
-            Debug.LogWarning("FollowerSystem is Not Found in hierarchy");
+            DestroyImmediate(avatarDescriptor.transform.Find("FollowerSystem").gameObject);
         }
         try
         {
@@ -585,9 +627,9 @@ public class SetUpFollower : EditorWindow
             avatarDescriptor.expressionParameters.parameters =
             avatarDescriptor.expressionParameters.parameters.Where(item => !item.name.Contains("FS_")).ToArray();
         }
-        catch
+        catch(Exception e)
         {
-            Debug.LogWarning("FollowerSystem is Not Found in expressionsMenu or Parameters");
+            Debug.LogException(e);
         }
         try
         {
@@ -612,11 +654,10 @@ public class SetUpFollower : EditorWindow
                 }
             }
         }
-        catch
+        catch (Exception e)
         {
-            Debug.LogWarning("Something wrong in FX layer");
+            Debug.LogException(e);
         }
-
         AssetDatabase.SaveAssets();
     }
 
@@ -638,6 +679,8 @@ public class SetUpFollower : EditorWindow
             Debug.LogError("Avatar is not Vaild"); 
             return null;
         }
+
+        HumAnimator.applyRootMotion = true;
 
         var FrameCount = animationClip.length * animationClip.frameRate;
         var CurveRotX = new AnimationCurve[HumanTrait.BoneCount];
@@ -754,6 +797,18 @@ public class SetUpFollower : EditorWindow
             }
             else
             {
+                if (RootCurvePosX.keys.Last().value != HumanoidAvatar.transform.localPosition.x)
+                {
+                    RootCurvePosX.AddKey(new Keyframe(i / animationClip.frameRate, HumanoidAvatar.transform.localPosition.x));
+                }
+                if (RootCurvePosY.keys.Last().value != HumanoidAvatar.transform.localPosition.y)
+                {
+                    RootCurvePosY.AddKey(new Keyframe(i / animationClip.frameRate, HumanoidAvatar.transform.localPosition.y));
+                }
+                if (RootCurvePosZ.keys.Last().value != HumanoidAvatar.transform.localPosition.z)
+                {
+                    RootCurvePosZ.AddKey(new Keyframe(i / animationClip.frameRate, HumanoidAvatar.transform.localPosition.z));
+                }
                 if (RootCurveRotX.keys.Last().value != HumanoidAvatar.transform.localRotation.x)
                 {
                     RootCurveRotX.AddKey(new Keyframe(i / animationClip.frameRate, HumanoidAvatar.transform.localRotation.x));
@@ -801,6 +856,8 @@ public class SetUpFollower : EditorWindow
         Setting.loopTime = true;
         Setting.loopBlend = true;
         AnimationUtility.SetAnimationClipSettings(result, Setting);
+
+        HumAnimator.applyRootMotion = false;
 
         return result;
     }
