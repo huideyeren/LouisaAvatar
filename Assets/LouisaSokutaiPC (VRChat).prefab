@@ -697,7 +697,7 @@ Transform:
   m_GameObject: {fileID: 1305593764660101987}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0000014901161, y: -0.4130218, z: -0.02433464}
+  m_LocalPosition: {x: 0, y: -0.4130218, z: -0.02433464}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1520,9 +1520,9 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 1390173064732449247}
   m_AABB:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  m_DirtyAABB: 1
+    m_Center: {x: -0.000000029802322, y: 0.033435315, z: -0.18964699}
+    m_Extent: {x: 0.6663381, y: 0.9901686, z: 0.5151113}
+  m_DirtyAABB: 0
 --- !u!1 &3506713674479469936
 GameObject:
   m_ObjectHideFlags: 0
@@ -2088,7 +2088,7 @@ Transform:
   m_GameObject: {fileID: 4400073485276541207}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0000015050173, y: -0.41302168, z: -0.02433467}
+  m_LocalPosition: {x: -0, y: -0.41302168, z: -0.02433467}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2992,8 +2992,8 @@ MonoBehaviour:
       right: {x: 0, y: -0.034899496, z: 0, w: 0.99939084}
     eyesLookingRight:
       linked: 1
-      left: {x: 0, y: 0.034899496, z: 0, w: 0.99939084}
-      right: {x: 0, y: 0.034899496, z: 0, w: 0.99939084}
+      left: {x: 0, y: 0.034899436, z: 0, w: 0.99939084}
+      right: {x: 0, y: 0.034899436, z: 0, w: 0.99939084}
     eyelidType: 2
     upperLeftEyelid: {fileID: 0}
     upperRightEyelid: {fileID: 0}
@@ -3082,119 +3082,143 @@ MonoBehaviour:
     mask: {fileID: 0}
     isDefault: 1
   AnimationPreset: {fileID: 0}
-  animationHashSet: []
+  animationHashSet:
+  - hash: -16764768
+    name: Victory
+  - hash: 1769010927
+    name: RockNRoll
+  - hash: 1995948584
+    name: HandGun
+  - hash: -1030030191
+    name: ThumbsUp
+  - hash: 1868730190
+    name: fingerpoint
+  - hash: 1403165477
+    name: FaceBlend
+  - hash: 544641495
+    name: Stop
+  - hash: 135586964
+    name: Blink
+  - hash: -804244242
+    name: Empty
+  - hash: 1459790474
+    name: proxy_eyes_die
+  - hash: -1312500560
+    name: proxy_eyes_open
+  - hash: 245245300
+    name: proxy_eyes_shut
   autoFootsteps: 1
   autoLocomotion: 1
   collider_head:
     isMirrored: 1
     state: 0
-    transform: {fileID: 0}
-    radius: 0
+    transform: {fileID: 5171159446550579962}
+    radius: 0.06675535
     height: 0
-    position: {x: 0, y: 0, z: 0}
+    position: {x: 0, y: 0.05897665, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   collider_torso:
     isMirrored: 1
     state: 0
-    transform: {fileID: 0}
-    radius: 0
-    height: 0
-    position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0, w: 1}
+    transform: {fileID: 1738840781532377560}
+    radius: 0.10114446
+    height: 0.4028104
+    position: {x: 0.000000003060673, y: 0.03225553, z: -0.035010017}
+    rotation: {x: -0.040950917, y: 0, z: -0.0000000035800434, w: 0.9991612}
   collider_footR:
     isMirrored: 1
     state: 0
-    transform: {fileID: 0}
-    radius: 0
+    transform: {fileID: 638605754697974247}
+    radius: 0.07692142
     height: 0
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   collider_footL:
     isMirrored: 1
     state: 0
-    transform: {fileID: 0}
-    radius: 0
+    transform: {fileID: 4098197848759834555}
+    radius: 0.076921426
     height: 0
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   collider_handR:
     isMirrored: 1
     state: 0
-    transform: {fileID: 0}
-    radius: 0
-    height: 0
-    position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0, w: 1}
+    transform: {fileID: 5155667267658484382}
+    radius: 0.015680607
+    height: 0.06272243
+    position: {x: 0.052785236, y: 0.0060978117, z: -0.0043501207}
+    rotation: {x: -0.70471776, y: 0, z: 0.05807701, w: 0.7071068}
   collider_handL:
     isMirrored: 1
     state: 0
-    transform: {fileID: 0}
-    radius: 0
-    height: 0
-    position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0, w: 1}
+    transform: {fileID: 5629903348262716888}
+    radius: 0.015680607
+    height: 0.06272243
+    position: {x: -0.052785236, y: 0.0060978117, z: -0.0043501332}
+    rotation: {x: -0.70471776, y: 0, z: -0.058077116, w: 0.7071068}
   collider_fingerIndexL:
     isMirrored: 1
     state: 0
-    transform: {fileID: 0}
-    radius: 0
-    height: 0
+    transform: {fileID: 3704839345610987959}
+    radius: 0.007871053
+    height: 0.039355267
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   collider_fingerMiddleL:
     isMirrored: 1
     state: 0
-    transform: {fileID: 0}
-    radius: 0
-    height: 0
+    transform: {fileID: 8337020701142777911}
+    radius: 0.0087847235
+    height: 0.043923616
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   collider_fingerRingL:
     isMirrored: 1
     state: 0
-    transform: {fileID: 0}
-    radius: 0
-    height: 0
+    transform: {fileID: 6599643496128711903}
+    radius: 0.0076229097
+    height: 0.038114548
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   collider_fingerLittleL:
     isMirrored: 1
     state: 0
-    transform: {fileID: 0}
-    radius: 0
-    height: 0
+    transform: {fileID: 7160948577728523821}
+    radius: 0.0069634914
+    height: 0.034817457
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   collider_fingerIndexR:
     isMirrored: 1
     state: 0
-    transform: {fileID: 0}
-    radius: 0
-    height: 0
+    transform: {fileID: 246669232480691443}
+    radius: 0.007871053
+    height: 0.039355263
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   collider_fingerMiddleR:
     isMirrored: 1
     state: 0
-    transform: {fileID: 0}
-    radius: 0
-    height: 0
+    transform: {fileID: 8078311345747550174}
+    radius: 0.0087847235
+    height: 0.043923616
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   collider_fingerRingR:
     isMirrored: 1
     state: 0
-    transform: {fileID: 0}
-    radius: 0
-    height: 0
+    transform: {fileID: 7687295905415118545}
+    radius: 0.0076229097
+    height: 0.038114548
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   collider_fingerLittleR:
     isMirrored: 1
     state: 0
-    transform: {fileID: 0}
-    radius: 0
-    height: 0
+    transform: {fileID: 3858455003464839266}
+    radius: 0.0069634914
+    height: 0.034817457
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!114 &6194248350886319069
@@ -3214,7 +3238,7 @@ MonoBehaviour:
   blueprintId: 
   contentType: 0
   assetBundleUnityVersion: 
-  fallbackStatus: 0
+  fallbackStatus: 3
 --- !u!1 &7490172117404321851
 GameObject:
   m_ObjectHideFlags: 0
@@ -3369,12 +3393,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1501466690851821407}
   - {fileID: 6809980027887513408}
   - {fileID: 8736152983604607954}
   - {fileID: 8524082421730422971}
   - {fileID: 7773336693924878241}
   - {fileID: 5338456508115372683}
-  - {fileID: 1501466690851821407}
   m_Father: {fileID: 1207099590811714370}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7862729275480351979
@@ -3722,13 +3746,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2928336393147076015}
   - {fileID: 8306929824893710664}
   - {fileID: 8099778482419148713}
   - {fileID: 2866289843700940627}
   - {fileID: 1661512159939717218}
   - {fileID: 197102028117933858}
   - {fileID: 5658852933579475703}
-  - {fileID: 2928336393147076015}
   m_Father: {fileID: 2818676562141728776}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8983055150455724401
