@@ -66,6 +66,7 @@ namespace XWear.IO.XResource.Transform
             {
                 Guid = guid,
                 Name = collectTargetGameObject.name,
+                Tag = collectTargetGameObject.tag,
                 ActiveSelf = collectTargetGameObject.activeSelf
             };
 

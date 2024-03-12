@@ -48,6 +48,7 @@ namespace XWear.IO.XResource.Transform
             // XResourceGameObjectに対応するGameObjectの実体を生成する
             var instance = new GameObject(sourceXResourceGameObject.Name);
             instance.SetActive(sourceXResourceGameObject.ActiveSelf);
+            instance.tag = sourceXResourceGameObject.Tag;
 
             _guidToBuildTransformMemo.Add(sourceXResourceGameObject.Guid, instance.transform);
 

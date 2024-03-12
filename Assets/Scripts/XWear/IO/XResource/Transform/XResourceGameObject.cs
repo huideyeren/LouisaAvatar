@@ -8,6 +8,7 @@ namespace XWear.IO.XResource.Transform
         public string Guid;
         public string Name;
         public bool IsHumanoidBone;
+        public string Tag;
         public UnityEngine.HumanBodyBones HumanBodyBones;
 
         public XResourceTransform Transform = new XResourceTransform();

@@ -11,5 +11,6 @@ namespace XWear.IO.XResource.Component
         Particle,
         Light,
         Collider,
+        UnityConstraint
     }
 }

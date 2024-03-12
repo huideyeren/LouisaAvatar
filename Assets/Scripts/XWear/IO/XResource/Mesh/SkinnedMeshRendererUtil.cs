@@ -14,6 +14,7 @@ namespace XWear.IO.XResource.Mesh
             SkinnedMeshRenderer source
         )
         {
+            target.tag = source.gameObject.tag;
             var attachedSmr = target.AddComponent<SkinnedMeshRenderer>();
             attachedSmr.bones = source.bones;
             attachedSmr.sharedMesh = source.sharedMesh;

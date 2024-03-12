@@ -80,6 +80,10 @@ namespace XWear.IO.Avatar
 
         private void Validate()
         {
+            if (_exportSourceBaseModel == null)
+            {
+                return;
+            }
             _exportSourceBaseModel.Validate();
 
             // 衣装パーツのExportSourceが破棄された衣装アイテムのExportSourceを削除する

@@ -9,6 +9,12 @@ using XWear.IO.Editor.Material;
 using XWear.IO.Editor.Mesh;
 using XWear.IO.Editor.Texture;
 using XWear.IO.XResource.Component.ComponentPlugin;
+using XWear.IO.XResource.Component.UnityConstraint.Aim;
+using XWear.IO.XResource.Component.UnityConstraint.LookAt;
+using XWear.IO.XResource.Component.UnityConstraint.Parent;
+using XWear.IO.XResource.Component.UnityConstraint.Position;
+using XWear.IO.XResource.Component.UnityConstraint.Rotation;
+using XWear.IO.XResource.Component.UnityConstraint.Scale;
 using XWear.IO.XResource.Material;
 using XWear.XWearPackage.ForVrc.ComponentPlugins;
 using Object = UnityEngine.Object;
@@ -30,13 +36,17 @@ namespace XWear.XWearPackage.Editor.Util.Export
             {
                 new PhysBoneCollectPlugin(),
                 new PhysBoneColliderCollectPlugin(),
+                new AimConstraintCollectComponentPlugin(),
+                new LookAtConstraintCollectComponentPlugin(),
+                new ParentConstraintCollectComponentPlugin(),
+                new PositionConstraintCollectComponentPlugin(),
+                new RotationConstraintCollectComponentPlugin(),
+                new ScaleConstraintCollectComponentPlugin()
             };
 
             if (exportContext.exportType == ExportContext.ExportType.Avatar)
             {
                 plugins.Add(new VrcAvatarDescriptorCollectPlugin());
-                plugins.Add(new ParticleCollectComponentPlugin());
-                plugins.Add(new ColliderCollectComponentPlugin());
             }
 
             switch (exportContext.exportType)

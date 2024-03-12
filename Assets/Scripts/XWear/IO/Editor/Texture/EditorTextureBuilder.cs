@@ -45,6 +45,14 @@ namespace XWear.IO.Editor.Texture
                         }
 
                         textureImporter.alphaIsTransparency = xResourceTexture.alphaIsTransparency;
+                        var textureImporterSettings = xResourceTexture.TextureImportSettings;
+                        textureImporter.streamingMipmaps = textureImporterSettings.streamingMipmaps;
+                        textureImporter.mipmapEnabled = textureImporterSettings.mipmapEnabled;
+                        textureImporter.crunchedCompression =
+                            textureImporterSettings.crunchedCompression;
+                        textureImporter.compressionQuality =
+                            textureImporterSettings.compressionQuality;
+                        textureImporter.maxTextureSize = textureImporterSettings.maxTextureSize;
                         textureImporter.SaveAndReimport();
                     }
 

@@ -12,6 +12,12 @@ using XWear.IO.Editor.Texture;
 using XWear.IO.XResource;
 using XWear.IO.XResource.Archive;
 using XWear.IO.XResource.Component.ComponentPlugin;
+using XWear.IO.XResource.Component.UnityConstraint.Aim;
+using XWear.IO.XResource.Component.UnityConstraint.LookAt;
+using XWear.IO.XResource.Component.UnityConstraint.Parent;
+using XWear.IO.XResource.Component.UnityConstraint.Position;
+using XWear.IO.XResource.Component.UnityConstraint.Rotation;
+using XWear.IO.XResource.Component.UnityConstraint.Scale;
 using XWear.IO.XResource.Material;
 using XWear.XWearPackage.ForVrc.ComponentPlugins;
 using XWear.XWearPackage.ForVrc.HumanoidTransfer;
@@ -65,10 +71,12 @@ namespace XWear.XWearPackage.Editor.Util.Import
                 new PhysBoneBuildPlugin(),
                 new PhysBoneColliderBuildPlugin(),
                 new VrcAvatarDescriptorBuildPlugin(),
-                new ParticleBuildComponentPlugin(),
-                new BoxColliderBuildComponentPlugin(),
-                new CapsuleColliderBuildComponentPlugin(),
-                new SphereColliderBuildComponentPlugin(),
+                new AimConstraintBuildComponentPlugin(),
+                new LookAtConstraintBuildComponentPlugin(),
+                new ParentConstraintBuildComponentPlugin(),
+                new PositionConstraintBuildComponentPlugin(),
+                new RotationConstraintBuildComponentPlugin(),
+                new ScaleConstraintBuildComponentPlugin()
             };
 
             var editorTextureBuilder = new EditorTextureBuilder(assetSaver);

@@ -9,6 +9,9 @@ namespace XWear.IO.XResource.Texture
         public string Guid = "";
 
         public TextureParam TextureParam;
+        public TextureImportSettings TextureImportSettings;
+
+        // todo マイグレーションによってここの2項目をTextureImportSettingsに入れるべきである
         public bool isNormal;
         public bool alphaIsTransparency;
 
@@ -23,6 +26,8 @@ namespace XWear.IO.XResource.Texture
             {
                 TextureParam = new RenderTextureParam(renderTexture);
             }
+
+            TextureImportSettings = new TextureImportSettings();
         }
 
         public XResourceTexture() { }

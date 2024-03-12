@@ -42,7 +42,7 @@ namespace XWear.IO.Editor
             // 一時アセットを作って再インポート
             var sourceFileNameWithoutExtension = useGuidFileName
                 ? System.Guid.NewGuid().ToString()
-                : Path.GetFileNameWithoutExtension(sourceAssetPath) + "_tmp";
+                : Path.GetFileNameWithoutExtension(sourceAssetPath);
 
             var sourceFileNameExtension = Path.GetExtension(sourceAssetPath);
 
