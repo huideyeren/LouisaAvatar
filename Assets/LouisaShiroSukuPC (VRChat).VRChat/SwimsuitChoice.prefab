@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5155498797739105339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 80135336651641688}
+  - component: {fileID: 2643317589548966781}
+  - component: {fileID: 2735602550964375283}
+  m_Layer: 0
+  m_Name: SwimsuitChoice
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &80135336651641688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5155498797739105339}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2643317589548966781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5155498797739105339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dd4e9b75a0484149be2e2a2993c1a05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AvatarChooseMenu:
+    IncludeAssetType: 3
+    TransitionSeconds: 0
+    Saved: 1
+    ParameterName: 
+    InternalParameter: 0
+    ChooseObjects:
+      keys:
+      - Shirosuku
+      - LouisaShiroWanpi Variant/RedOnepieceSwimSuit
+      - LouisaSukumizu (VRChat)/Sukumizu
+      - LouisaCamoBikiniCloth Variant/CamoBikini
+      values:
+      - values: 01000000
+      - values: 02000000
+      - values: 00000000
+      - values: 0000000003000000
+    ChooseMaterials:
+      keys1: []
+      keys2: 
+      values: []
+    ChooseBlendShapes:
+      keys1: []
+      keys2: []
+      values: []
+    ChooseShaderParameters:
+      keys1: []
+      keys2: []
+      values: []
+    ChooseDefaultValue: 0
+    ChooseCount: 5
+    ChooseNames:
+      keys: 0000000001000000020000000300000004000000
+      values:
+      - "\u7D3A\u30B9\u30AF"
+      - "\u767D\u30B9\u30AF"
+      - "\u8D64\u30B9\u30AF"
+      - "\u8FF7\u5F69\u30D3\u30AD\u30CB"
+      - "\u30AD\u30E3\u30F3\u30D0\u30B9\u30D3\u30AD\u30CB"
+    ChooseParentIcon: {fileID: 0}
+    ChooseIcons:
+      keys: 0000000001000000020000000300000004000000
+      values:
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+--- !u!114 &2735602550964375283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5155498797739105339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef83cb0c23d4d7c9d41021e544a1978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuToAppend: {fileID: 0}
+  installTargetMenu: {fileID: 0}

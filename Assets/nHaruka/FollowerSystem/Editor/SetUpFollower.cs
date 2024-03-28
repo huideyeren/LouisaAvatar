@@ -16,10 +16,8 @@ using VRC.SDK3A.Editor;
 
 public class SetUpFollower : EditorWindow
 {
-
     private VRCAvatarDescriptor avatarDescriptor;
     private VRCAvatarDescriptor HumAvatar;
-    private bool debugMode = false;
     private bool WriteDefault = true;
     private string convertedDataPath = "Assets/nHaruka/FollowerSystem/Animation/ConvertedAnimation/";
     private string controllerPath = "Assets/nHaruka/FollowerSystem/Animation/Humanoid/HumanoidLocomotion.asset";
@@ -28,31 +26,73 @@ public class SetUpFollower : EditorWindow
     private AnimatorController humLocomotionController;
     private bool useFX = false;
     private bool[] inheritLayers = null;
+    private bool maintainAvatar = false;
     private Vector2 scrollPosition;
     private AnimatorController origFX;
     private VRCExpressionParameters origExParams;
     private VRCExpressionsMenu origExMenu;
-
+    private bool changeAnim = false;
+    private AnimationClip modIdle = null;
+    private AnimationClip modWalk = null;
+    private AnimationClip modRun = null;
+    private AnimationClip modWait1 = null;
+    private AnimationClip modWait2 = null;
+    private AnimationClip modWait3 = null;
+    private AnimationClip modWait4 = null;
 
     // Start is called before the first frame update
     [MenuItem("nHaruka/FollowerSystem")]
     // Start is called before the first frame update
     private static void Init()
     {
-        var window = GetWindowWithRect<SetUpFollower>(new Rect(0, 0, 400, 600));
+        var window = GetWindowWithRect<SetUpFollower>(new Rect(0, 0, 450, 650));
         window.Show();
     }
     
     // Update is called once per frame
     private void OnGUI()
     {
+        GUILayout.BeginVertical();
+
+        GUIStyle style2 = new GUIStyle(GUI.skin.label);
+        style2.wordWrap = true;
+        style2.normal.textColor = Color.red;
+        style2.fontStyle = FontStyle.Normal;
+
         GUILayout.Space(10);
         avatarDescriptor =
             (VRCAvatarDescriptor)EditorGUILayout.ObjectField("MainAvatar", avatarDescriptor, typeof(VRCAvatarDescriptor), true);
         
         GUILayout.Space(10);
-        HumAvatar =
-            (VRCAvatarDescriptor)EditorGUILayout.ObjectField("FollowerAvatar", HumAvatar, typeof(VRCAvatarDescriptor), true);
+
+        if (!maintainAvatar)
+        {
+            HumAvatar =
+                (VRCAvatarDescriptor)EditorGUILayout.ObjectField("FollowerAvatar", HumAvatar, typeof(VRCAvatarDescriptor), true);
+        }
+
+        EditorGUI.BeginChangeCheck();
+
+        maintainAvatar = GUILayout.Toggle(maintainAvatar, "セットアップ済みのアバターを維持する");
+
+        if (EditorGUI.EndChangeCheck())
+        {
+            if (maintainAvatar == true && avatarDescriptor.transform.Find("FollowerSystem/Follower/AvatarBackup") != null && avatarDescriptor.transform.Find("FollowerSystem/Follower/AvatarBackup").childCount != 0)
+            {
+                var bk = avatarDescriptor.transform.Find("FollowerSystem/Follower/AvatarBackup").GetChild(0).gameObject;
+                HumAvatar = bk.GetComponent<VRCAvatarDescriptor>();
+            }
+            else
+            {
+                HumAvatar = null;
+            }
+        }
+
+        if (HumAvatar == null && maintainAvatar == true)
+        {
+
+            EditorGUILayout.LabelField("※セットアップ済みのアバターが見つかりません", style2);
+        }
 
         if (HumAvatar != null)
         {
@@ -72,7 +112,10 @@ public class SetUpFollower : EditorWindow
                 if (useFX)
                 {
                     GUILayout.Label("継承するレイヤーを選択");
-                    scrollPosition = GUILayout.BeginScrollView(scrollPosition);
+
+                    EditorGUILayout.LabelField("※メインアバターと同じパラメーターを使用しているレイヤーを継承すると、予期せぬ不具合が発生する可能性があります。", style2);
+
+                    scrollPosition = GUILayout.BeginScrollView(scrollPosition,false,true, GUILayout.Height(100));
                     if (inheritLayers == null || inheritLayers.Length != origFX.layers.Length)
                     {
                         inheritLayers = new bool[origFX.layers.Length];
@@ -82,10 +125,13 @@ public class SetUpFollower : EditorWindow
                         inheritLayers[i] = GUILayout.Toggle(inheritLayers[i], origFX.layers[i].name);
                     }
                     GUILayout.EndScrollView();
-
                 }
-
             }
+        }
+        else
+        {
+            inheritLayers = null;
+            useFX = false;
         }
         GUILayout.Space(10);
         GUIStyle style = new GUIStyle(GUI.skin.label);
@@ -95,11 +141,44 @@ public class SetUpFollower : EditorWindow
         EditorGUILayout.LabelField("※導入アバターのFXレイヤーがどちらで統一されているかによって選択してください。\n統一されていないと表情がおかしくなったり正しく機能しなかったりします。", style);
         GUILayout.Space(10);
 
+        changeAnim = GUILayout.Toggle(changeAnim, "歩行・待機アニメーションを差し替える");
+
+        EditorGUILayout.LabelField("※VRChatSDKの\"proxy\"で始まるアニメーションは使用できません。", style);
+
+
+        if (changeAnim)
+        {
+            GUILayout.Space(10);
+            modIdle =
+                (AnimationClip)EditorGUILayout.ObjectField("Idle", modIdle, typeof(AnimationClip), true);
+            GUILayout.Space(10);
+            modWalk =
+                (AnimationClip)EditorGUILayout.ObjectField("Walk", modWalk, typeof(AnimationClip), true);
+            GUILayout.Space(10);
+            modRun =
+                (AnimationClip)EditorGUILayout.ObjectField("Run", modRun, typeof(AnimationClip), true);
+            GUILayout.Space(10);
+            modWait1 =
+                (AnimationClip)EditorGUILayout.ObjectField("Waiting1", modWait1, typeof(AnimationClip), true);
+            GUILayout.Space(10);
+            modWait2 =
+                (AnimationClip)EditorGUILayout.ObjectField("Waiting2", modWait2, typeof(AnimationClip), true);
+            GUILayout.Space(10);
+            modWait3 =
+                (AnimationClip)EditorGUILayout.ObjectField("Waiting3", modWait3, typeof(AnimationClip), true);
+            GUILayout.Space(10);
+            modWait4 =
+                (AnimationClip)EditorGUILayout.ObjectField("Waiting4", modWait4, typeof(AnimationClip), true);
+        }
+        GUILayout.Space(10);
+        EditorGUI.BeginDisabledGroup(HumAvatar == null || avatarDescriptor == null);
+
         if (GUILayout.Button("Setup"))
         {
+
             try
             {
-                var result = setup(false);
+                var result = setup();
                 if (result)
                 {
                     EditorUtility.DisplayDialog("Finished", "Finished!", "OK");
@@ -112,6 +191,10 @@ public class SetUpFollower : EditorWindow
                 remove(true);
             }
         }
+
+        EditorGUI.EndDisabledGroup();
+
+        EditorGUI.BeginDisabledGroup(avatarDescriptor == null);
         if (GUILayout.Button("Remove"))
         {
             try
@@ -126,33 +209,20 @@ public class SetUpFollower : EditorWindow
             }
         }
 
-        if (GUILayout.Button("アバターを維持してセットアップしなおす"))
-        {
-            try
-            {
-                var result = setup(true);
-                if (result)
-                {
-                    EditorUtility.DisplayDialog("Finished", "Finished!", "OK");
-                }
-            }
-            catch (Exception e)
-            {
-                EditorUtility.DisplayDialog("Error", "An error occurred. See console log.", "OK");
-                Debug.LogError(e);
-                remove(true);
-            }
-        }
+        EditorGUI.EndDisabledGroup();
+ 
+        GUILayout.Space(10);
 
+        EditorGUILayout.LabelField("※メインアバターと同じパラメーターを出力するPhysboneやContactReceiverが存在すると、予期せぬ不具合が発生する可能性があります。", style2);
+
+        GUILayout.EndVertical();
     }
 
-    bool setup(bool maintainAvatar)
+    bool setup()
     {
         if (maintainAvatar == true && avatarDescriptor.transform.Find("FollowerSystem/Follower/AvatarBackup").GetChild(0) != null)
         {
-            var bk = avatarDescriptor.transform.Find("FollowerSystem/Follower/AvatarBackup").GetChild(0).gameObject;
-            bk.transform.parent = null;
-            HumAvatar = bk.GetComponent<VRCAvatarDescriptor>();
+            HumAvatar.transform.parent = null;
         }
 
         if (HumAvatar == null)
@@ -195,20 +265,142 @@ public class SetUpFollower : EditorWindow
         HumAvatar.name = "Avatar";
 
         humLocomotionController = AssetDatabase.LoadAssetAtPath<AnimatorController>(controllerPath);
+
         AnimationClip[] animationClips = humLocomotionController.animationClips;
         AnimationClip[] convertedClips = new AnimationClip[animationClips.Length];
+
+        if (!Directory.Exists(convertedDataPath))
+        {
+            Directory.CreateDirectory(convertedDataPath);
+        }
+
+        if (!Directory.Exists(convertedDataPath + avatarDescriptor.name))
+        {
+            Directory.CreateDirectory(convertedDataPath + avatarDescriptor.name);
+        }
+        else
+        {
+            Directory.Delete(convertedDataPath + avatarDescriptor.name,true);
+            Directory.CreateDirectory(convertedDataPath + avatarDescriptor.name);
+        }
+
+        AssetDatabase.Refresh();
+
+        if (changeAnim)
+        {
+            for (int i = 0; i < animationClips.Length; i++)
+            {
+                if(animationClips[i].name == "Idle" && modIdle != null)
+                {
+                    if (!Directory.Exists(convertedDataPath + avatarDescriptor.name + "/modAnim"))
+                    {
+                        Directory.CreateDirectory(convertedDataPath + avatarDescriptor.name + "/modAnim");
+                    }
+                    var path = convertedDataPath + avatarDescriptor.name + "/modAnim/Idle.anim";
+                    if (!File.Exists(path))
+                    {
+                        AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(modIdle), path);
+                    }
+                    animationClips[i] = AssetDatabase.LoadAssetAtPath<AnimationClip>(path);
+                }
+                if (animationClips[i].name == "Walking" && modWalk != null)
+                {
+                    if (!Directory.Exists(convertedDataPath + avatarDescriptor.name + "/modAnim"))
+                    {
+                        Directory.CreateDirectory(convertedDataPath + avatarDescriptor.name + "/modAnim");
+                    }
+                    var path = convertedDataPath + avatarDescriptor.name + "/modAnim/Walking.anim";
+                    if (!File.Exists(path))
+                    {
+                        AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(modWalk), path);
+                    }
+                    animationClips[i] = AssetDatabase.LoadAssetAtPath<AnimationClip>(path);
+                }
+                if (animationClips[i].name == "Running" && modRun != null)
+                {
+                    if (!Directory.Exists(convertedDataPath + avatarDescriptor.name + "/modAnim"))
+                    {
+                        Directory.CreateDirectory(convertedDataPath + avatarDescriptor.name + "/modAnim");
+                    }
+                    var path = convertedDataPath + avatarDescriptor.name + "/modAnim/Running.anim";
+                    if (!File.Exists(path))
+                    {
+                        AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(modRun), path);
+                    }
+                    animationClips[i] = AssetDatabase.LoadAssetAtPath<AnimationClip>(path);
+                }
+                if (animationClips[i].name == "Waiting1" && modWait1 != null)
+                {
+                    if (!Directory.Exists(convertedDataPath + avatarDescriptor.name + "/modAnim"))
+                    {
+                        Directory.CreateDirectory(convertedDataPath + avatarDescriptor.name + "/modAnim");
+                    }
+                    var path = convertedDataPath + avatarDescriptor.name + "/modAnim/Waiting1.anim";
+                    if (!File.Exists(path))
+                    {
+                        AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(modWait1), path);
+                    }
+                    animationClips[i] = AssetDatabase.LoadAssetAtPath<AnimationClip>(path);
+                }
+                if (animationClips[i].name == "Waiting2" && modWait2 != null)
+                {
+                    if (!Directory.Exists(convertedDataPath + avatarDescriptor.name + "/modAnim"))
+                    {
+                        Directory.CreateDirectory(convertedDataPath + avatarDescriptor.name + "/modAnim");
+                    }
+                    var path = convertedDataPath + avatarDescriptor.name + "/modAnim/Waiting2.anim";
+                    if (!File.Exists(path))
+                    {
+                        AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(modWait2), path);
+                    }
+                    animationClips[i] = AssetDatabase.LoadAssetAtPath<AnimationClip>(path);
+                }
+                if (animationClips[i].name == "Waiting3" && modWait3 != null)
+                {
+                    if (!Directory.Exists(convertedDataPath + avatarDescriptor.name + "/modAnim"))
+                    {
+                        Directory.CreateDirectory(convertedDataPath + avatarDescriptor.name + "/modAnim");
+                    }
+                    var path = convertedDataPath + avatarDescriptor.name + "/modAnim/Waiting3.anim";
+                    if (!File.Exists(path))
+                    {
+                        AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(modWait3), path);
+                    }
+                    animationClips[i] = AssetDatabase.LoadAssetAtPath<AnimationClip>(path);
+                }
+                if (animationClips[i].name == "Waiting4" && modWait4 != null)
+                {
+                    if (!Directory.Exists(convertedDataPath + avatarDescriptor.name + "/modAnim"))
+                    {
+                        Directory.CreateDirectory(convertedDataPath + avatarDescriptor.name + "/modAnim");
+                    }
+                    var path = convertedDataPath + avatarDescriptor.name + "/modAnim/Waiting4.anim";
+                    if (!File.Exists(path))
+                    {
+                        AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(modWait4), path);
+                    }
+                    animationClips[i] = AssetDatabase.LoadAssetAtPath<AnimationClip>(path);
+                }
+                AnimationClipSettings settings = AnimationUtility.GetAnimationClipSettings(animationClips[i]);
+                settings.loopTime = true;
+                settings.loopBlend = true;
+                settings.loopBlendOrientation = false;
+                settings.loopBlendPositionXZ = false;
+                settings.loopBlendPositionY = false;
+                AnimationUtility.SetAnimationClipSettings(animationClips[i], settings);
+                //Debug.Log(AnimationUtility.GetAnimationClipSettings(animationClips[i]).loopBlendOrientation);
+                //Debug.Log(animationClips[i]);
+            }
+        }
 
         try
         {
             foreach (var anim in animationClips)
             {
+                //Debug.Log(anim);
                 var convertedAnimationClip = ConvertHumanoidToGeneric(anim, HumAvatar.gameObject);
                 convertedClips[Array.IndexOf(animationClips, anim)] = convertedAnimationClip;
-                if (!Directory.Exists(convertedDataPath + avatarDescriptor.name))
-                {
-                    Directory.CreateDirectory(convertedDataPath + avatarDescriptor.name);
-                }
-                AssetDatabase.DeleteAsset(convertedDataPath + avatarDescriptor.name + "/" + convertedAnimationClip.name + ".anim");
+
                 AssetDatabase.CreateAsset(convertedClips[Array.IndexOf(animationClips, anim)], convertedDataPath + avatarDescriptor.name + "/" + convertedAnimationClip.name + ".anim");
             }
         }
@@ -222,16 +414,13 @@ public class SetUpFollower : EditorWindow
 
         var convertedControllerPath = convertedDataPath + avatarDescriptor.name + "/LocomotionConverted.asset";
 
-        if (File.Exists(convertedControllerPath))
-        {
-            AssetDatabase.DeleteAsset(convertedControllerPath);
-        }
-
         AssetDatabase.CopyAsset(controllerPath, convertedControllerPath);
-        
+
         var convertedController = AssetDatabase.LoadAssetAtPath<AnimatorController>(convertedControllerPath);
 
-        foreach(var layer in convertedController.layers)
+        EditorUtility.SetDirty(convertedController);
+
+        foreach (var layer in convertedController.layers)
         {
             foreach (var state in layer.stateMachine.states)
             {
@@ -261,11 +450,11 @@ public class SetUpFollower : EditorWindow
 
         var followerAnimator = HumAvatar.GetComponent<Animator>();
 
-        var AvatarAnchorCons = SystemRoot.transform.Find("Base/AvatarAnchor").GetComponent<ParentConstraint>();
-        AvatarAnchorCons.SetSource(0, new ConstraintSource { weight = 1, sourceTransform = avatarDescriptor.transform });
+        //var AvatarAnchorCons = SystemRoot.transform.Find("Base/AvatarAnchor").GetComponent<ParentConstraint>();
+        //AvatarAnchorCons.SetSource(0, new ConstraintSource { weight = 1, sourceTransform = avatarDescriptor.transform });
 
-        var RemotePositionRootAnchorCons = SystemRoot.transform.Find("RemotePositionRoot/Anchor").GetComponent<PositionConstraint>();
-        RemotePositionRootAnchorCons.SetSource(0, new ConstraintSource { weight = 1, sourceTransform = avatarDescriptor.transform });
+        //var RemotePositionRootAnchorCons = SystemRoot.transform.Find("RemotePositionRoot/Anchor").GetComponent<PositionConstraint>();
+        //RemotePositionRootAnchorCons.SetSource(0, new ConstraintSource { weight = 1, sourceTransform = avatarDescriptor.transform });
 
 
 
@@ -363,10 +552,6 @@ public class SetUpFollower : EditorWindow
         {
 
             var convertedFXPath = convertedDataPath + avatarDescriptor.name + "/FXConverted.asset";
-            if (File.Exists(convertedFXPath))
-            {
-                AssetDatabase.DeleteAsset(convertedFXPath);
-            }
             AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(origFX), convertedFXPath);
             var convertedFX = AssetDatabase.LoadAssetAtPath<AnimatorController>(convertedFXPath);
 
@@ -376,6 +561,7 @@ public class SetUpFollower : EditorWindow
 
             for (int i = 0; i < convertedFX.layers.Length; i++)
             {
+                Debug.Log(inheritLayers[i]);
                 if (inheritLayers[i] == true)
                 {
                     foreach (var anytransition in convertedFX.layers[i].stateMachine.anyStateTransitions)
@@ -439,13 +625,20 @@ public class SetUpFollower : EditorWindow
                             }
                         }
                     }
-                    var convertedLayer = ConvertFX(convertedFX.layers[i]);
-                    convertedLayer.name = "FS_" + convertedFX.layers[i].name;
+                    AnimatorControllerLayer convertedLayer = null;
+                    if (i == 0)
+                    {
+                        convertedLayer = ConvertFX(convertedFX.layers[i], true);
+                    }
+                    else
+                    {
+                        convertedLayer = ConvertFX(convertedFX.layers[i]);
+                    }
                     if (!Array.Exists(FxAnimator.layers, (x => x.name == convertedLayer.name)))
                     {
                         FxAnimator.AddLayer(convertedLayer);
+                        AssetDatabase.AddObjectToAsset((UnityEngine.Object)convertedLayer.stateMachine, AssetDatabase.GetAssetPath(FxAnimator));
                     }
-
                 }
             }
 
@@ -460,19 +653,11 @@ public class SetUpFollower : EditorWindow
             File.WriteAllText(convertedDataPath + avatarDescriptor.name + "/ParamList.json", json);
         }
 
-        if (File.Exists(convertedDataPath + avatarDescriptor.name +  "/FollowerSystem_Params.asset"))
-        {
-            AssetDatabase.DeleteAsset(convertedDataPath + avatarDescriptor.name + "/FollowerSystem_Params.asset");
-        }
         AssetDatabase.CopyAsset("Assets/nHaruka/FollowerSystem/FollowerSystem_Params.asset", convertedDataPath + avatarDescriptor.name + "/FollowerSystem_Params.asset");
         var AddExpParam = AssetDatabase.LoadAssetAtPath<VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionParameters>(convertedDataPath + avatarDescriptor.name + "/FollowerSystem_Params.asset");
 
         avatarDescriptor.expressionParameters.parameters = avatarDescriptor.expressionParameters.parameters.Union(AddExpParam.parameters).ToArray();
 
-        if (File.Exists(convertedDataPath + avatarDescriptor.name + "/FollowerSystem_Menu.asset"))
-        {
-            AssetDatabase.DeleteAsset(convertedDataPath + avatarDescriptor.name + "/FollowerSystem_Menu.asset");
-        }
         AssetDatabase.CopyAsset("Assets/nHaruka/FollowerSystem/FollowerSystem_Menu.asset", convertedDataPath + avatarDescriptor.name + "/FollowerSystem_Menu.asset");
         var AddSubMenu = AssetDatabase.LoadAssetAtPath<VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionsMenu>(convertedDataPath + avatarDescriptor.name + "/FollowerSystem_Menu.asset");
 
@@ -483,23 +668,31 @@ public class SetUpFollower : EditorWindow
         {
 
             var list = avatarDescriptor.expressionParameters.parameters.ToList();
-            for (int i = 0; i < origExParams.parameters.Length; i++)
+
+            if (origExParams != null)
             {
-                if (paramList.ContainsKey(origExParams.parameters[i].name))
+                for (int i = 0; i < origExParams.parameters.Length; i++)
                 {
-                    list.Add(origExParams.parameters[i]);
+                    if (paramList.ContainsKey(origExParams.parameters[i].name))
+                    {
+                        list.Add(origExParams.parameters[i]);
+                    }
                 }
             }
             avatarDescriptor.expressionParameters.parameters = list.ToArray();
 
+            if (origExMenu != null)
+            {
+                var FollowerAvatarMenu = new VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionsMenu.Control();
+                FollowerAvatarMenu.name = "FollowerAvatarMenu";
+                FollowerAvatarMenu.type = VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionsMenu.Control.ControlType.SubMenu;
+                FollowerAvatarMenu.subMenu = ConvertMenu(origExMenu);
 
-            var FollowerAvatarMenu = new VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionsMenu.Control();
-            FollowerAvatarMenu.name = "FollowerAvatarMenu";
-            FollowerAvatarMenu.type = VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionsMenu.Control.ControlType.SubMenu;
-            FollowerAvatarMenu.subMenu = ConvertMenu(origExMenu);
-
-            AddSubMenu.controls.Add(FollowerAvatarMenu);
-
+                if (FollowerAvatarMenu.subMenu != null)
+                {
+                    AddSubMenu.controls.Add(FollowerAvatarMenu);
+                }
+            }
         }
 
         if (avatarDescriptor.expressionsMenu.controls.Count != 8)
@@ -550,10 +743,6 @@ public class SetUpFollower : EditorWindow
 
     VRCExpressionsMenu ConvertMenu(VRCExpressionsMenu Menu)
     {
-        if (File.Exists(convertedDataPath + avatarDescriptor.name + "/" + Menu.name + ".asset"))
-        {
-            AssetDatabase.DeleteAsset(convertedDataPath + avatarDescriptor.name + "/" + Menu.name + ".asset");
-        }
         AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(Menu), convertedDataPath + avatarDescriptor.name + "/"+ Menu.name +".asset");
         var newMenu = AssetDatabase.LoadAssetAtPath<VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionsMenu>(convertedDataPath + avatarDescriptor.name + "/" + Menu.name + ".asset");
         EditorUtility.SetDirty(newMenu);
@@ -566,7 +755,7 @@ public class SetUpFollower : EditorWindow
                 newMenu.controls[i].subMenu = ConvertMenu(newMenu.controls[i].subMenu);
                 if (newMenu.controls[i].subMenu == null)
                 {
-                    Debug.Log(newMenu.controls[i].name);
+                    //Debug.Log(newMenu.controls[i].name);
                     rmIndex.Add(i);
                     //newMenu.controls.RemoveAt(i);
                 }
@@ -578,7 +767,7 @@ public class SetUpFollower : EditorWindow
 
                     if (newMenu.controls[i].subParameters == null ||newMenu.controls[i].subParameters.Length == 0)
                     {
-                        Debug.Log(newMenu.controls[i].name);
+                        //Debug.Log(newMenu.controls[i].name);
                         rmIndex.Add(i);
                     }
                     else
@@ -587,7 +776,7 @@ public class SetUpFollower : EditorWindow
                         {
                             if (!Array.Exists(avatarDescriptor.expressionParameters.parameters, (x => x.name == newMenu.controls[i].subParameters[k].name)))
                             {
-                                Debug.Log(newMenu.controls[i].name);
+                                //Debug.Log(newMenu.controls[i].name);
                                 rmIndex.Add(i);
                                 //newMenu.controls.RemoveAt(i);                        }
 
@@ -862,11 +1051,11 @@ public class SetUpFollower : EditorWindow
         return result;
     }
 
-    AnimatorControllerLayer ConvertFX(AnimatorControllerLayer origLayer )
+    AnimatorControllerLayer ConvertFX(AnimatorControllerLayer origLayer, bool isFirst = false )
     {
-        AnimatorControllerLayer convertedLayer = origLayer;
-        convertedLayer.name = origLayer.name;
-        Debug.Log(convertedLayer.name);
+        AnimatorControllerLayer convertedLayer = nharuka.DeepCopyAnimatorController.DeepCopyLayer(origLayer, "FS_" + origLayer.name, isFirst);
+
+        //Debug.Log(convertedLayer.name);
 
         foreach(var state in convertedLayer.stateMachine.states)
         {
@@ -876,23 +1065,41 @@ public class SetUpFollower : EditorWindow
             }
             else if (state.state.motion != null)
             {
+                var convertedClip = new AnimationClip();
+
                 AnimationClip clip = state.state.motion as AnimationClip;
                 var bindings = AnimationUtility.GetCurveBindings(clip);
-                var newbindings = AnimationUtility.GetCurveBindings(clip);
+                var newbindings = new EditorCurveBinding[bindings.Length];
                 var curves = new AnimationCurve[bindings.Length];
                 for (int i = 0; i < bindings.Length; i++)
                 {
-                    newbindings[i].path = GetPath(avatarDescriptor.transform, HumAvatar.transform) + "/" + bindings[i].path;
-                    curves[i] = AnimationUtility.GetEditorCurve(clip, bindings[i]);
+                    if (!bindings[i].path.StartsWith("FollowerSystem"))
+                    {
+                        if (bindings[i].type == typeof(Animator))
+                        {
+                            convertedClip = ConvertHumanoidToGeneric(clip, HumAvatar.gameObject);
+                            break;
+                        }
+                        else
+                        {
+                            newbindings[i] = new EditorCurveBinding();
+                            newbindings[i].propertyName = bindings[i].propertyName;
+                            newbindings[i].type = bindings[i].type;
+                            newbindings[i].path = GetPath(avatarDescriptor.transform, HumAvatar.transform) + "/" + bindings[i].path;
+                            curves[i] = AnimationUtility.GetEditorCurve(clip, bindings[i]);
+                            AnimationUtility.SetEditorCurve(convertedClip, newbindings[i], curves[i]);
+                        }
+                    }
                 }
-                if (!Directory.Exists(convertedDataPath + avatarDescriptor.name))
+
+                if (!File.Exists(convertedDataPath + avatarDescriptor.name + "/" + clip.name + ".anim"))
                 {
-                    Directory.CreateDirectory(convertedDataPath + avatarDescriptor.name);
+                    AssetDatabase.CreateAsset(convertedClip, convertedDataPath + avatarDescriptor.name + "/" + clip.name + ".anim");
                 }
-                var convertedClip = new AnimationClip();
-                AnimationUtility.SetEditorCurves(convertedClip, newbindings, curves);
-                AssetDatabase.DeleteAsset(convertedDataPath + avatarDescriptor.name + "/" + clip.name + ".anim");
-                AssetDatabase.CreateAsset(convertedClip, convertedDataPath + avatarDescriptor.name + "/" + clip.name + ".anim");
+                else
+                {
+                    convertedClip = AssetDatabase.LoadAssetAtPath<AnimationClip>(convertedDataPath + avatarDescriptor.name + "/" + clip.name + ".anim");
+                }
 
                 state.state.motion = convertedClip;
             }
@@ -913,31 +1120,37 @@ public class SetUpFollower : EditorWindow
             }
             else if (children[n].motion != null)
             {
+                var convertedClip = new AnimationClip();
+
                 AnimationClip clip = (AnimationClip)children[n].motion;
                 var clipname = clip.name;
                 var bindings = AnimationUtility.GetCurveBindings(clip);
-                var newbindings = AnimationUtility.GetCurveBindings(clip);
+                var newbindings = new EditorCurveBinding[bindings.Length];
                 var curves = new AnimationCurve[bindings.Length];
                 for (int i = 0; i < bindings.Length; i++)
                 {
                     if (!newbindings[i].path.StartsWith("FollowerSystem"))
                     {
-                        newbindings[i].path = GetPath(avatarDescriptor.transform, HumAvatar.transform) + "/" + bindings[i].path;
-                        curves[i] = AnimationUtility.GetEditorCurve(clip, bindings[i]);
+                        if (bindings[i].type == typeof(Animator))
+                        {
+                            convertedClip = ConvertHumanoidToGeneric(clip, HumAvatar.gameObject);
+                            break;
+                        }
+                        else
+                        {
+                            newbindings[i] = new EditorCurveBinding();
+                            newbindings[i].propertyName = bindings[i].propertyName;
+                            newbindings[i].type = bindings[i].GetType();
+                            newbindings[i].path = GetPath(avatarDescriptor.transform, HumAvatar.transform) + "/" + bindings[i].path;
+                            curves[i] = AnimationUtility.GetEditorCurve(clip, bindings[i]);
+                            AnimationUtility.SetEditorCurve(convertedClip, newbindings[i], curves[i]);
+                        }
                     }
                 }
-                if (!Directory.Exists(convertedDataPath + avatarDescriptor.name))
-                {
-                    Directory.CreateDirectory(convertedDataPath + avatarDescriptor.name);
-                }
-                var convertedClip = new AnimationClip();
-                AnimationUtility.SetEditorCurves(convertedClip, newbindings, curves);
-                AssetDatabase.DeleteAsset(convertedDataPath + avatarDescriptor.name + "/" + clipname + ".anim");
                 AssetDatabase.CreateAsset(convertedClip, convertedDataPath + avatarDescriptor.name + "/" + clipname + ".anim");
 
                 children[n].motion = convertedClip;
             }
-
         }
         blendTree.children = children;
 

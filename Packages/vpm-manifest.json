@@ -9,20 +9,11 @@
     "vrchat.blackstartx.gesture-manager": {
       "version": "3.8.8"
     },
-    "vrchat.jordo.easyquestswitch": {
-      "version": "1.3.1"
-    },
     "jp.lilxyzw.liltoon": {
       "version": "1.7.2"
     },
     "jp.lilxyzw.avatar-utils": {
       "version": "1.1.0"
-    },
-    "nadena.dev.modular-avatar": {
-      "version": "1.9.4"
-    },
-    "jp.pokemori.vrm-converter-for-vrchat": {
-      "version": "41.0.0"
     },
     "com.github.kurotu.vrc-quest-tools": {
       "version": "2.2.0"
@@ -42,26 +33,38 @@
     "jp.suzuryg.face-emo": {
       "version": "1.5.3"
     },
-    "jp.whiteflare.unlitwf": {
-      "version": "1.10.0"
-    },
-    "com.vrchat.avatars": {
-      "version": "3.5.1"
-    },
     "lyuma.av3emulator": {
       "version": "3.3.0"
-    },
-    "com.vrchat.base": {
-      "version": "3.5.1"
     },
     "net.narazaka.vrchat.avatar-parameters-driver": {
       "version": "2.0.2"
     },
+    "net.rs64.tex-trans-tool": {
+      "version": "0.6.1"
+    },
+    "jp.pokemori.vrm-converter-for-vrchat": {
+      "version": "41.1.0"
+    },
+    "jp.whiteflare.unlitwf": {
+      "version": "1.12.0"
+    },
+    "com.vrchat.base": {
+      "version": "3.5.2"
+    },
+    "com.vrchat.avatars": {
+      "version": "3.5.2"
+    },
+    "vrchat.jordo.easyquestswitch": {
+      "version": "1.4.0"
+    },
+    "nadena.dev.modular-avatar": {
+      "version": "1.9.10"
+    },
     "com.anatawa12.avatar-optimizer": {
-      "version": "1.6.7"
+      "version": "1.6.9"
     },
     "net.narazaka.vrchat.avatar-menu-creater-for-ma": {
-      "version": "1.15.1"
+      "version": "1.17.0"
     }
   },
   "locked": {
@@ -80,51 +83,11 @@
         "com.vrchat.avatars": "3.2.x || 3.3.x || 3.4.x || 3.5.x"
       }
     },
-    "vrchat.jordo.easyquestswitch": {
-      "version": "1.3.1"
-    },
     "jp.lilxyzw.liltoon": {
       "version": "1.7.2"
     },
     "jp.lilxyzw.avatar-utils": {
       "version": "1.1.0"
-    },
-    "nadena.dev.modular-avatar": {
-      "version": "1.9.4",
-      "dependencies": {
-        "com.vrchat.avatars": ">=3.4.0",
-        "nadena.dev.ndmf": ">=1.3.6 <2.0.0-a"
-      }
-    },
-    "jp.pokemori.vrm-converter-for-vrchat": {
-      "version": "41.0.0",
-      "dependencies": {
-        "com.vrchat.avatars": "^3.5.0",
-        "com.vrmc.univrm": "^0.119.0",
-        "jp.pokemori.univrm-extensions": "^10.0.0"
-      }
-    },
-    "com.vrmc.univrm": {
-      "version": "0.119.0",
-      "dependencies": {
-        "com.vrmc.vrmshaders": "0.119.0",
-        "com.vrmc.gltf": "0.119.0"
-      }
-    },
-    "com.vrmc.vrmshaders": {
-      "version": "0.119.0"
-    },
-    "com.vrmc.gltf": {
-      "version": "0.119.0",
-      "dependencies": {
-        "com.vrmc.vrmshaders": "0.119.0"
-      }
-    },
-    "jp.pokemori.univrm-extensions": {
-      "version": "10.0.0",
-      "dependencies": {
-        "com.vrmc.univrm": "^0.119.0"
-      }
     },
     "com.github.kurotu.vrc-quest-tools": {
       "version": "2.2.0",
@@ -164,32 +127,14 @@
     "jp.suzuryg.face-emo": {
       "version": "1.5.3"
     },
-    "jp.whiteflare.unlitwf": {
-      "version": "1.10.0",
-      "dependencies": {
-        "jp.whiteflare.unlitwf.texpack": "^1.1.0"
-      }
-    },
     "jp.whiteflare.unlitwf.texpack": {
       "version": "1.1.1"
-    },
-    "nadena.dev.ndmf": {
-      "version": "1.3.6"
     },
     "com.chocopoi.vrc.avatarlib": {
       "version": "1.0.2"
     },
     "com.chocopoi.vrc.dressingframework": {
       "version": "1.0.4"
-    },
-    "com.vrchat.avatars": {
-      "version": "3.5.1",
-      "dependencies": {
-        "com.vrchat.base": "3.5.1"
-      }
-    },
-    "com.vrchat.base": {
-      "version": "3.5.1"
     },
     "lyuma.av3emulator": {
       "version": "3.3.0",
@@ -210,8 +155,74 @@
     "net.narazaka.vrchat.avatar-parameters-util": {
       "version": "1.0.4"
     },
+    "net.rs64.tex-trans-tool": {
+      "version": "0.6.1",
+      "dependencies": {}
+    },
+    "jp.pokemori.vrm-converter-for-vrchat": {
+      "version": "41.1.0",
+      "dependencies": {
+        "com.vrchat.avatars": "^3.5.0",
+        "com.vrmc.univrm": "^0.121.0",
+        "jp.pokemori.univrm-extensions": "^10.1.0"
+      }
+    },
+    "com.vrmc.univrm": {
+      "version": "0.121.0",
+      "dependencies": {
+        "com.vrmc.vrmshaders": "0.121.0",
+        "com.vrmc.gltf": "0.121.0"
+      }
+    },
+    "com.vrmc.vrmshaders": {
+      "version": "0.121.0",
+      "dependencies": {}
+    },
+    "com.vrmc.gltf": {
+      "version": "0.121.0",
+      "dependencies": {
+        "com.vrmc.vrmshaders": "0.121.0"
+      }
+    },
+    "jp.pokemori.univrm-extensions": {
+      "version": "10.1.0",
+      "dependencies": {
+        "com.vrmc.univrm": "^0.121.0"
+      }
+    },
+    "jp.whiteflare.unlitwf": {
+      "version": "1.12.0",
+      "dependencies": {
+        "jp.whiteflare.unlitwf.texpack": "^1.1.0"
+      }
+    },
+    "com.vrchat.base": {
+      "version": "3.5.2",
+      "dependencies": {}
+    },
+    "com.vrchat.avatars": {
+      "version": "3.5.2",
+      "dependencies": {
+        "com.vrchat.base": "3.5.2"
+      }
+    },
+    "vrchat.jordo.easyquestswitch": {
+      "version": "1.4.0",
+      "dependencies": {}
+    },
+    "nadena.dev.modular-avatar": {
+      "version": "1.9.10",
+      "dependencies": {
+        "com.vrchat.avatars": ">=3.4.0",
+        "nadena.dev.ndmf": ">=1.4.0 <2.0.0-a"
+      }
+    },
+    "nadena.dev.ndmf": {
+      "version": "1.4.0",
+      "dependencies": {}
+    },
     "com.anatawa12.avatar-optimizer": {
-      "version": "1.6.7",
+      "version": "1.6.9",
       "dependencies": {
         "com.anatawa12.custom-localization-for-editor-extension": "^1.2.0",
         "nadena.dev.ndmf": "^1.3.0",
@@ -219,7 +230,7 @@
       }
     },
     "net.narazaka.vrchat.avatar-menu-creater-for-ma": {
-      "version": "1.15.1",
+      "version": "1.17.0",
       "dependencies": {
         "com.vrchat.avatars": ">=3.0.9",
         "nadena.dev.modular-avatar": ">=1.0.0 <2.0.0-a"
